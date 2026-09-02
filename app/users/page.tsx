@@ -1,53 +1,72 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { useState } from "react"
-import {useEffect} from "react"
+import { useCallback, useState, useEffect } from "react"
 
-const page = () => {
+const Page = () => {
   const [data, setData] = useState<any[] | null>(null)
-  useEffect(()=>{
-    const fetchData = async () => {
-      const res = await fetch('/api/users')
-      const data = await res.json()
-      setData(data);
-    }
-    fetchData()
-  },[])
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const fetchData = useCallback(async () => {
+    const res = await fetch('/api/users')
+    const json = await res.json()
+    setData(json)
+  }, [])
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    const formData = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const formData = new FormData(form)
     const name = formData.get('name') as string
     const email = formData.get('email') as string
-    fetch('/api/users',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify({name,email})
-    })  
+
+    const res = await fetch('/api/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email })
+    })
+
+    if (res.ok) {
+      setStatus('success')
+      await fetchData()
+      form.reset()
+    } else {
+      setStatus('error')
+    }
   }
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-          <input type="text" name="name" placeholder="Name" />
-          <input type="email" name="email" placeholder="Email" />
-          <Button type="submit">Submit</Button>
+        <input type="text" name="name" placeholder="Name" />
+        <input type="email" name="email" placeholder="Email" />
+        <Button type="submit">Submit</Button>
+
+        {status === 'success' && (
+          <p className="text-green-500">User created successfully!</p>
+        )}
+        {status === 'error' && (
+          <p className="text-red-500">Failed to create user.</p>
+        )}
       </form>
-    <div>
-      {(!data) ? (
-        <p>Loading...</p>
-      ) : (
-        data.map((user: any) => (
-          <div key={user.id}>
-            <p>{user.name} || {user.email}</p>
-          </div>
-        ))
-      )}
-    </div>
+
+      <div>
+        {!data ? (
+          <p>Loading...</p>
+        ) : (
+          data.map((user: any) => (
+            <div className="border-b py-2" key={user.id}>
+              <p className="text-lg font-semibold">{user.name}</p>
+              <p className="text-muted-foreground">{user.email}</p>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   )
 }
 
-export default page
+export default Page
