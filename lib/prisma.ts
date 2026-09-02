@@ -11,4 +11,4 @@ if (connectionString) {
   }) as PrismaClientType
 }
 
-export const prisma = prismaClient
+export const db = prismaClient
