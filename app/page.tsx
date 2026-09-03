@@ -24,16 +24,16 @@ const capabilities = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#fafafa] text-zinc-950 dark:bg-[#030303] dark:text-white">
+    <main className="min-h-screen bg-transparent text-zinc-950 dark:bg-transparent dark:text-white">
       {/* HERO */}
-      <section className="relative flex min-h-[calc(100vh-72px)] items-center overflow-hidden border-b border-zinc-200 bg-[#fafafa] dark:border-white/10 dark:bg-[#030303]">
+      <section className="relative flex min-h-[calc(100vh-72px)] items-center overflow-hidden border-b border-zinc-200 bg-transparent dark:border-white/10 dark:bg-transparent">
         <ForgeUICanvas />
       </section>
 
       {/* WORKFLOW */}
       <section
         id="workflow"
-        className="border-b border-zinc-200 bg-white dark:border-white/10 dark:bg-[#030303]"
+        className="border-b border-zinc-200 bg-transparent dark:border-white/10 dark:bg-transparent"
       >
         <div className="mx-auto max-w-6xl px-6 py-28 lg:px-8">
           <div className="grid gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
@@ -91,7 +91,7 @@ export default function Home() {
       {/* CTA */}
       <section
         id="about"
-        className="border-b border-zinc-200 bg-[#fafafa] dark:border-white/10 dark:bg-[#030303]"
+        className="border-b border-zinc-200 bg-transparent dark:border-white/10 dark:bg-transparent"
       >
         <div className="mx-auto max-w-6xl px-6 py-32 text-center lg:px-8">
           <p className="text-sm font-medium text-zinc-400 dark:text-white/45">
@@ -113,7 +113,7 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="mx-auto flex max-w-6xl items-center justify-between bg-[#fafafa] px-6 py-7 text-xs text-zinc-400 dark:bg-[#030303] dark:text-white/40 lg:px-8">
+      <footer className="mx-auto flex max-w-6xl items-center justify-between bg-transparent px-6 py-7 text-xs text-zinc-400 dark:bg-transparent dark:text-white/40 lg:px-8">
         <span className="font-medium text-zinc-600 dark:text-white/70">Forge-UI</span>
         <span>Made for the next idea.</span>
       </footer>

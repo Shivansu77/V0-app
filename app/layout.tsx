@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
+import { Toaster } from 'sonner'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/ui/theme-provider'
 import Navbar from '@/modules/home/components/navbar'
@@ -36,11 +37,13 @@ export default function RootLayout({
         <ClerkProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="light"
+            defaultTheme="dark"
             enableSystem={false}
+            storageKey="forge-ui-theme"
             disableTransitionOnChange
           >
             <Navbar />
+            <Toaster position="bottom-right" richColors />
             {children}
           </ThemeProvider>
         </ClerkProvider>

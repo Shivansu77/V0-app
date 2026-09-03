@@ -8,6 +8,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { ForgeUiLogo } from "@/components/brand/forge-ui-logo";
 
 const Navbar = () => {
   return (
@@ -20,11 +21,7 @@ const Navbar = () => {
           className="flex items-center gap-2.5 text-xl font-semibold tracking-tight text-zinc-950 dark:text-white"
           aria-label="Forge-UI home"
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-900/40 bg-zinc-900/5 text-sm text-zinc-950 dark:border-white/40 dark:bg-white/5 dark:text-white">
-            ✦
-          </span>
-
-          <span>Forge-UI</span>
+          <ForgeUiLogo className="h-9 w-[137px] text-zinc-950 dark:text-white" />
         </Link>
 
         {/* Navigation */}

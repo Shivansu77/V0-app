@@ -125,10 +125,15 @@
   }
   body {
     @apply bg-background text-foreground;
-    background: #fafafa;
+    min-height: 100vh;
+    background-color: #fafafa;
+    background-image: radial-gradient(circle, rgba(24, 24, 27, 0.16) 1.5px, transparent 1.7px);
+    background-attachment: fixed;
+    background-size: 22px 22px;
   }
   .dark body {
-    background: #030303;
+    background-color: #030303;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.18) 1.5px, transparent 1.7px);
   }
   html {
     @apply font-sans;
@@ -582,19 +587,19 @@
   z-index: 0;
   overflow: hidden;
   isolation: isolate;
-  background: #fafafa;
+  background: transparent;
 }
 
 .forge-ui-background {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: #fafafa;
+  background: transparent;
 }
 
 .dark .forge-ui-scene,
 .dark .forge-ui-background {
-  background: #030303;
+  background: transparent;
 }
 
 #forge-ui-canvas {
