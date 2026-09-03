@@ -27,6 +27,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+
+  const content = (
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="dark"
+      enableSystem={false}
+      storageKey="forge-ui-theme"
+      disableTransitionOnChange
+    >
+      {publishableKey ? <Navbar /> : null}
+      <Toaster position="bottom-right" richColors />
+      {children}
+    </ThemeProvider>
+  )
+
   return (
     <html
       lang="en"
@@ -34,19 +50,11 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <ClerkProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem={false}
-            storageKey="forge-ui-theme"
-            disableTransitionOnChange
-          >
-            <Navbar />
-            <Toaster position="bottom-right" richColors />
-            {children}
-          </ThemeProvider>
-        </ClerkProvider>
+        {publishableKey ? (
+          <ClerkProvider publishableKey={publishableKey}>{content}</ClerkProvider>
+        ) : (
+          content
+        )}
       </body>
     </html>
   )
