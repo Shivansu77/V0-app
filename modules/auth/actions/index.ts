@@ -20,7 +20,7 @@ export const onBoardUser = async () => {
   }
 
   if (!db) {
-    throw new Error("DATABASE_URL is not configured.");
+    return null;
   }
 
   const name = [user.firstName, user.lastName].filter(Boolean).join(" ") || null;
@@ -49,7 +49,7 @@ export const getCurrentUser = async () => {
   }
 
   if (!db) {
-    throw new Error("DATABASE_URL is not configured.");
+    return null;
   }
 
   return db.user.findUnique({
