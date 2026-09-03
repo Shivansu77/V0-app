@@ -15,6 +15,17 @@ export function useCreateProject() {
     try {
       const id = crypto.randomUUID()
 
+      const response = await fetch("/api/create-task", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, content }),
+      })
+
+      if (!response.ok) {
+        const body = (await response.json().catch(() => null)) as { message?: string } | null
+        throw new Error(body?.message ?? "Failed to start project processing")
+      }
+
       if (typeof window !== "undefined") {
         window.sessionStorage.setItem(
           `forge-ui-project-${id}`,

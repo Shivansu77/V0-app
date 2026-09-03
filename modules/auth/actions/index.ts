@@ -45,24 +45,3 @@ export const onBoardUser = async () => {
     return null;
   }
 };
-
-export const getCurrentUser = async () => {
-  try {
-    const user = await currentUser();
-
-    if (!user) {
-      return null;
-    }
-
-    if (!db) {
-      return null;
-    }
-
-    return await db.user.findUnique({
-      where: { clerkId: user.id },
-    });
-  } catch (error) {
-    console.error("Error in getCurrentUser:", error);
-    return null;
-  }
-};

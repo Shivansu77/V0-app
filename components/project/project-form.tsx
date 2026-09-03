@@ -114,7 +114,7 @@ const ProjectsForm = () => {
             key={index}
             type="button"
             onClick={() => handleTemplate(template.prompt)}
-            // disabled={isPending}
+            disabled={isPending}
             className="group relative rounded-xl border border-border/70 bg-card/70 p-4 text-left backdrop-blur-md transition-all duration-200 hover:border-primary/30 hover:bg-accent/50 hover:shadow-md disabled:cursor-not-allowed disabled:opacity-50"
           >
             <div className="flex flex-col gap-2">
@@ -155,16 +155,13 @@ const ProjectsForm = () => {
             render={({ field }) => (
               <TextAreaAutosize
                 {...field}
-                // disabled={isPending}
+                disabled={isPending}
                 placeholder="Describe what you want to create..."
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 minRows={3}
                 maxRows={8}
-                className={cn(
-                  "pt-4 resize-none border-none w-full outline-none bg-transparent",
-                  //   isPending && "opacity-50"
-                )}
+                className="w-full resize-none border-none bg-transparent pt-4 outline-none disabled:opacity-50"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
                     e.preventDefault();

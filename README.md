@@ -16,6 +16,23 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Background tasks
+
+Forge-UI uses Inngest for durable project processing. Run the local Inngest Dev
+Server in a second terminal while developing:
+
+```bash
+npx inngest-cli@latest dev
+```
+
+Then open [http://localhost:8288](http://localhost:8288) to inspect registered
+functions and runs. Set `INNGEST_DEV=1` when starting Next.js, or add it to
+`.env.local`, so events are sent to the local Dev Server:
+
+```bash
+INNGEST_DEV=1 npm run dev
+```
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

@@ -6,11 +6,11 @@ const isPublicRoute = (request: NextRequest) => {
 
   return (
     pathname === "/" ||
-    pathname === "/about" ||
     pathname === "/sign-in" ||
     pathname.startsWith("/sign-in/") ||
     pathname === "/sign-up" ||
-    pathname.startsWith("/sign-up/")
+    pathname.startsWith("/sign-up/") ||
+    pathname === "/api/inngest"
   );
 };
 
