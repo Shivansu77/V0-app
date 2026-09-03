@@ -10,7 +10,13 @@ const Dashboard = async () => {
     <main className="min-h-screen bg-transparent">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-6 sm:px-8 lg:px-10 lg:py-8">
         <header className="flex items-center justify-between border-b border-border/60 pb-5">
-          <ForgeUiLogo className="h-8 w-[122px] text-foreground" />
+          <div className="flex items-center gap-6">
+            <ForgeUiLogo className="h-8 w-[122px] text-foreground" />
+            <nav aria-label="Workspace navigation" className="hidden items-center gap-1 text-xs text-muted-foreground sm:flex">
+              <a href="/dashboard" className="rounded-lg bg-accent px-3 py-2 font-medium text-foreground">Create</a>
+              <a href="#recent" className="rounded-lg px-3 py-2 transition-colors hover:bg-accent hover:text-foreground">Recent</a>
+            </nav>
+          </div>
           <div className="flex items-center gap-3 text-xs text-muted-foreground">
             <span className="hidden items-center gap-2 sm:flex"><span className="size-1.5 rounded-full bg-primary" /> Workspace ready</span>
             <span className="rounded-full border border-border/70 bg-card/70 px-3 py-1.5 font-medium text-foreground">v1.0 beta</span>
@@ -37,7 +43,7 @@ const Dashboard = async () => {
 
         <ProjectForm />
 
-        <section className="grid gap-3 border-t border-border/60 pt-6 sm:grid-cols-3">
+        <section id="recent" aria-label="Workspace principles" className="grid gap-3 border-t border-border/60 pt-6 sm:grid-cols-3">
           {[
             { icon: Command, label: 'Prompt-first', text: 'Start with natural language' },
             { icon: Layers3, label: 'Composable', text: 'Built for thoughtful iteration' },
