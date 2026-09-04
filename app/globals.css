@@ -49,6 +49,8 @@
 }
 
 :root {
+  --font-geist-sans: Arial, Helvetica, sans-serif;
+  --font-geist-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   --card: oklch(0.99 0.01 260);
   --card-foreground: oklch(0.18 0.02 260);
   --popover: oklch(1 0 0);

@@ -2,6 +2,8 @@ import { onBoardUser } from '@/modules/auth/actions'
 import ProjectForm from '@/components/project/project-form'
 import { ForgeUiLogo } from '@/components/brand/forge-ui-logo'
 
+export const dynamic = 'force-dynamic'
+
 const Dashboard = async () => {
   await onBoardUser()
 

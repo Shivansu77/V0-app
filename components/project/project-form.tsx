@@ -12,7 +12,7 @@ import { Spinner } from "@/components/ui/spinner"
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
-import { useCreateProject } from "@/modules/projects/hooks/project";
+import { onInvoke } from "@/actions";
 
 const formSchema = z.object({ content: z.string().min(1, "Project description is required").max(1000, "Description is too long") })
 type ProjectFormValues = z.infer<typeof formSchema>;
@@ -70,8 +70,8 @@ const PROJECT_TEMPLATES = [
 
 const ProjectsForm = () => {
   const [isFocused, setIsFocused] = useState(false);
+  const [isPending, setIsPending] = useState(false);
   const router = useRouter();
-  const { mutateAsync, isPending } = useCreateProject()
 
   const form = useForm<ProjectFormValues>({
     resolver: zodResolver(formSchema),
@@ -91,23 +91,36 @@ const ProjectsForm = () => {
   };
 
   const onSubmit = async (values: ProjectFormValues) => {
+    setIsPending(true);
+
     try {
-      const res = await mutateAsync(values.content);
+      const res = await onInvoke(values.content);
+
+      window.sessionStorage.setItem(
+        `forge-ui-project-${res.id}`,
+        JSON.stringify({
+          id: res.id,
+          content: values.content,
+          response: res.response,
+          createdAt: new Date().toISOString(),
+        }),
+      );
+
       router.push(`/projects/${res.id}`);
       toast.success("Project created successfully");
       form.reset();
     } catch (error: unknown) {
       toast.error(error instanceof Error ? error.message : "Failed to create project");
+    } finally {
+      setIsPending(false);
     }
   };
-
 
   const isButtonDisabled = isPending || !content.trim()
 
   return (
     <div className="space-y-8">
       {/* Template Grid */}
-
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {PROJECT_TEMPLATES.map((template, index) => (
           <button

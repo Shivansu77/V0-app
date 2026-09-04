@@ -7,6 +7,7 @@ import { ForgeUiLogo } from "@/components/brand/forge-ui-logo";
 interface ProjectData {
   id: string;
   content: string;
+  response?: string;
   createdAt: string;
 }
 
@@ -63,9 +64,14 @@ export default function ProjectWorkspace({ id }: { id: string }) {
                 {project.content}
               </p>
             </div>
-            <p className="text-sm text-muted-foreground">
-              The brief has been queued for background processing.
-            </p>
+            {project.response ? (
+              <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 shadow-sm">
+                <p className="text-sm font-medium text-muted-foreground">Gemini response</p>
+                <p className="mt-3 whitespace-pre-wrap text-base leading-7 text-foreground/85">
+                  {project.response}
+                </p>
+              </div>
+            ) : null}
           </section>
         ) : (
           <section className="rounded-2xl border border-border/70 bg-card/70 p-8 shadow-sm backdrop-blur-md">
